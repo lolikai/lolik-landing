@@ -505,7 +505,6 @@ const YOUTUBE_COMING: string[] = [
   "Competitor Channel Tracking",
   "Trend Alerts",
   "Similar Winning Videos",
-  "Saved Reports",
   "Advanced Search Filters",
 ];
 
@@ -558,10 +557,10 @@ function FeatureCard({ name, desc }: { name: string; desc: string }) {
   return (
     <div className="rounded-xl border border-[var(--color-bg-elevated)] bg-[var(--color-bg-surface)] p-4 flex flex-col gap-2">
       <div className="flex items-start justify-between gap-2">
-        <span className="text-xs font-semibold text-[var(--color-text-primary)] leading-snug">{name}</span>
+        <span className="text-sm font-semibold text-[var(--color-text-primary)] leading-snug">{name}</span>
         <LiveBadge />
       </div>
-      <p className="text-[11px] text-[var(--color-text-muted)] leading-relaxed">{desc}</p>
+      <p className="text-xs text-[var(--color-text-muted)] leading-relaxed">{desc}</p>
     </div>
   );
 }
@@ -573,7 +572,7 @@ function FlagshipCard({ name, desc }: { name: string; desc: string }) {
         <span className="text-sm font-semibold text-[var(--color-text-primary)]">{name}</span>
         <FlagshipBadge />
       </div>
-      <p className="text-[11px] text-[var(--color-text-muted)] leading-relaxed">{desc}</p>
+      <p className="text-xs text-[var(--color-text-muted)] leading-relaxed">{desc}</p>
     </div>
   );
 }
@@ -603,7 +602,7 @@ function ProductBlock({
           {tag}
         </span>
         <h3 className="text-lg md:text-xl font-bold mb-1.5">{title}</h3>
-        <p className="text-xs text-[var(--color-text-muted)] leading-relaxed">{subtitle}</p>
+        <p className="text-sm text-[var(--color-text-muted)] leading-relaxed">{subtitle}</p>
       </div>
 
       {/* Live features grid */}
@@ -617,13 +616,13 @@ function ProductBlock({
       <div className="mb-6">
         <div className="flex items-center gap-2 mb-3">
           <ComingBadge />
-          <span className="text-[11px] text-[var(--color-text-muted)]">Next in the build queue</span>
+          <span className="text-xs text-[var(--color-text-muted)]">Next in the build queue</span>
         </div>
         <div className="flex flex-wrap gap-2">
           {coming.map((item) => (
             <span
               key={item}
-              className="rounded-lg border border-[var(--color-bg-elevated)] bg-[var(--color-bg-primary)] px-3 py-1.5 text-[11px] text-[var(--color-text-muted)]"
+              className="rounded-lg border border-[var(--color-bg-elevated)] bg-[var(--color-bg-primary)] px-3 py-1.5 text-xs text-[var(--color-text-muted)]"
             >
               {item}
             </span>
