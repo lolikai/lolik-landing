@@ -124,7 +124,7 @@ export function LandingPage() {
       {/* Platform Ecosystem — Roadmap anchor */}
       <section id="roadmap" className="relative z-10 max-w-5xl mx-auto px-5 pb-20 md:pb-28">
         <h2 className="text-center text-xl sm:text-2xl md:text-3xl font-bold mb-2">Platform Ecosystem</h2>
-        <p className="text-center text-xs sm:text-sm text-[var(--color-text-muted)] mb-4">Real-time signals from every major platform.</p>
+        <p className="text-center text-sm sm:text-base text-[var(--color-text-muted)] mb-4">Real-time signals from every major platform.</p>
         <p className="text-center text-[10px] text-[var(--color-text-muted)]/60 mb-10 max-w-lg mx-auto">
           Starting with YouTube + News intelligence. Expanding into full multi-platform trend tracking.
         </p>
@@ -144,7 +144,7 @@ export function LandingPage() {
       {/* Why Lolik Trends */}
       <section className="relative z-10 max-w-5xl mx-auto px-5 pb-20 md:pb-28">
         <h2 className="text-center text-xl sm:text-2xl md:text-3xl font-bold mb-2">Why Lolik Trends</h2>
-        <p className="text-center text-xs sm:text-sm text-[var(--color-text-muted)] mb-10 md:mb-12">Intelligence that goes beyond surface-level metrics.</p>
+        <p className="text-center text-sm sm:text-base text-[var(--color-text-muted)] mb-10 md:mb-12">Intelligence that goes beyond surface-level metrics.</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
           <WhyBlock icon={TrendingUp} title="Narrative shifts" description="Detect when public conversation pivots before mainstream coverage." />
           <WhyBlock icon={Zap} title="Viral velocity" description="Track acceleration rate, not just view counts." />
@@ -159,7 +159,7 @@ export function LandingPage() {
       <section id="early-access" className="relative z-10 max-w-xl mx-auto px-5 pb-28 md:pb-36">
         <div className="rounded-xl border border-[var(--color-bg-elevated)] bg-[var(--color-bg-surface)] p-6 md:p-8 text-center">
           <h2 className="text-lg md:text-xl font-bold mb-2">Get early access</h2>
-          <p className="text-xs sm:text-sm text-[var(--color-text-muted)] mb-6">Join the waitlist. We&apos;ll notify you when spots open.</p>
+          <p className="text-sm sm:text-base text-[var(--color-text-muted)] mb-6">Join the waitlist. We&apos;ll notify you when spots open.</p>
           <WaitlistForm />
           <p className="mt-3 text-[10px] text-[var(--color-text-muted)]/50">Access opens when the first product modules are ready. No spam.</p>
         </div>
@@ -642,7 +642,7 @@ function WhatIsIncluded() {
       {/* Section header */}
       <div className="text-center mb-10 md:mb-12">
         <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2">What&apos;s Included</h2>
-        <p className="text-xs sm:text-sm text-[var(--color-text-muted)] max-w-lg mx-auto">
+        <p className="text-sm sm:text-base text-[var(--color-text-muted)] max-w-lg mx-auto">
           Real capabilities, honest status. No vaporware.
         </p>
       </div>
