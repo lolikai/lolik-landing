@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useEffect, useCallback } from "react";
+import Script from "next/script";
+import { useState, useEffect, useCallback, useRef } from "react";
 import {
   SiYoutube,
   SiTiktok,
@@ -356,20 +357,61 @@ function WhyBlock({
 
 // ── Waitlist Form ────────────────────────────────────────────────────────────
 
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? "";
+
 function WaitlistForm() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const turnstileToken = useRef("");
+  const widgetId = useRef<string | undefined>(undefined);
+
+  // Register global Turnstile callback and render widget explicitly
+  useEffect(() => {
+    if (!TURNSTILE_SITE_KEY) return;
+
+    (window as unknown as Record<string, unknown>).__turnstileCb = (token: string) => {
+      turnstileToken.current = token;
+    };
+
+    const tryRender = () => {
+      const turnstile = (window as unknown as Record<string, unknown>).turnstile as
+        | { render: (el: string, opts: Record<string, unknown>) => string }
+        | undefined;
+      if (!turnstile || widgetId.current !== undefined) return;
+      widgetId.current = turnstile.render("#waitlist-turnstile", {
+        sitekey: TURNSTILE_SITE_KEY,
+        callback: "__turnstileCb",
+        theme: "dark",
+        size: "normal",
+      });
+    };
+
+    // Try immediately, then retry after script loads
+    tryRender();
+    const t = setTimeout(tryRender, 1500);
+    return () => clearTimeout(t);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !email.includes("@")) return;
+
+    // If Turnstile is configured but widget hasn't resolved yet, block
+    if (TURNSTILE_SITE_KEY && !turnstileToken.current) {
+      setStatus("error");
+      return;
+    }
 
     setStatus("loading");
     try {
       const res = await fetch("/api/waitlist", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({
+          email,
+          website: "",                          // honeypot — always empty from real users
+          turnstileToken: turnstileToken.current,
+        }),
       });
       if (res.ok) {
         setStatus("success");
@@ -394,24 +436,52 @@ function WaitlistForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2.5">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-2.5">
+      {/* Honeypot — hidden from humans, bots fill it in */}
       <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="your@email.com"
-        className="flex-1 rounded-lg border border-[var(--color-bg-elevated)] bg-[var(--color-bg-primary)] px-4 py-2.5 text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-muted)]/50 focus:outline-none focus:border-[var(--color-accent)]/30 focus:shadow-[0_0_12px_rgba(139,92,246,0.08)] transition-all"
-        required
+        type="text"
+        name="website"
+        aria-hidden="true"
+        tabIndex={-1}
+        autoComplete="off"
+        style={{ position: "absolute", opacity: 0, pointerEvents: "none", height: 0, width: 0 }}
       />
-      <button
-        type="submit"
-        disabled={status === "loading"}
-        className="rounded-lg bg-[var(--color-accent)] hover:bg-[var(--color-accent-glow)] px-5 py-2.5 text-sm font-semibold text-white transition-all shadow-[0_0_16px_rgba(139,92,246,0.2)] hover:shadow-[0_0_24px_rgba(139,92,246,0.35)] disabled:opacity-50"
-      >
-        {status === "loading" ? "Joining..." : "Join Waitlist"}
-      </button>
+
+      <div className="flex flex-col sm:flex-row gap-2.5">
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="your@email.com"
+          className="flex-1 rounded-lg border border-[var(--color-bg-elevated)] bg-[var(--color-bg-primary)] px-4 py-2.5 text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-muted)]/50 focus:outline-none focus:border-[var(--color-accent)]/30 focus:shadow-[0_0_12px_rgba(139,92,246,0.08)] transition-all"
+          required
+        />
+        <button
+          type="submit"
+          disabled={status === "loading"}
+          className="rounded-lg bg-[var(--color-accent)] hover:bg-[var(--color-accent-glow)] px-5 py-2.5 text-sm font-semibold text-white transition-all shadow-[0_0_16px_rgba(139,92,246,0.2)] hover:shadow-[0_0_24px_rgba(139,92,246,0.35)] disabled:opacity-50"
+        >
+          {status === "loading" ? "Joining..." : "Join Waitlist"}
+        </button>
+      </div>
+
+      {/* Turnstile widget — only renders when NEXT_PUBLIC_TURNSTILE_SITE_KEY is set */}
+      {TURNSTILE_SITE_KEY && (
+        <>
+          <Script
+            src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+            strategy="lazyOnload"
+          />
+          <div id="waitlist-turnstile" className="flex justify-center mt-1" />
+        </>
+      )}
+
       {status === "error" && (
-        <p className="text-xs text-red-400 mt-1">Something went wrong. Try again.</p>
+        <p className="text-xs text-red-400 text-center">
+          {TURNSTILE_SITE_KEY && !turnstileToken.current
+            ? "Complete the challenge before submitting."
+            : "Something went wrong. Try again."}
+        </p>
       )}
     </form>
   );
