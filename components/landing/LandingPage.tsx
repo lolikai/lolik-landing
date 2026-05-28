@@ -115,6 +115,11 @@ export function LandingPage() {
         <ScreenshotCarousel />
       </section>
 
+      {/* What's Included */}
+      <section className="relative z-10 max-w-5xl mx-auto px-5 pb-20 md:pb-28">
+        <WhatIsIncluded />
+      </section>
+
       {/* Platform Ecosystem — Roadmap anchor */}
       <section id="roadmap" className="relative z-10 max-w-5xl mx-auto px-5 pb-20 md:pb-28">
         <h2 className="text-center text-xl sm:text-2xl md:text-3xl font-bold mb-2">Platform Ecosystem</h2>
@@ -180,7 +185,7 @@ export function LandingPage() {
                 𝕏 / Twitter
               </a>
               <a
-                href="mailto:contact@lolikai.com"
+                href="mailto:contact@lolikai.eu"
                 className="text-[11px] text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-colors"
               >
                 Contact
@@ -409,5 +414,190 @@ function WaitlistForm() {
         <p className="text-xs text-red-400 mt-1">Something went wrong. Try again.</p>
       )}
     </form>
+  );
+}
+
+// ── What's Included ──────────────────────────────────────────────────────────
+
+const YOUTUBE_LIVE: { name: string; desc: string }[] = [
+  { name: "Viral Velocity Feed", desc: "600+ trending videos tracked daily across regions and niches." },
+  { name: "Viral Score + Phase", desc: "Rising, peaking, cooling or saturated — computed from velocity and engagement." },
+  { name: "Money Potential", desc: "Sponsorship fit, ecommerce demand and monetization signals per video." },
+  { name: "Opportunity Window", desc: "How much runway is left before a trend saturates." },
+  { name: "Comment Goldmine", desc: "Pain points, desires, questions and reactions extracted from real comments." },
+  { name: "Hook Blueprint", desc: "Second-by-second breakdown of how the video hook is built." },
+  { name: "Content Gap", desc: "What viewers wanted and didn't fully get — your angle in." },
+  { name: "Replicability Score", desc: "How hard it is to copy based on format, creator fit and execution difficulty." },
+  { name: "Full AI Breakdown", desc: "One-click analysis for title, thumbnail, hook, money, audience and key scores." },
+];
+
+const YOUTUBE_COMING: string[] = [
+  "Competitor Channel Tracking",
+  "Trend Alerts",
+  "Similar Winning Videos",
+  "Saved Reports",
+  "Advanced Search Filters",
+];
+
+const NEWS_LIVE: { name: string; desc: string }[] = [
+  { name: "Live Editorial Feed", desc: "Real stories from multiple sources, refreshed frequently." },
+  { name: "Why It Matters", desc: "Editorial significance in plain language — not just a summary." },
+  { name: "Narrative Timeline", desc: "Key story beats and why each moment matters." },
+  { name: "Underserved Angles", desc: "What competitors haven't covered yet, with urgency signals." },
+  { name: "Editorial Angles", desc: "Breaking, explainer, opinion, newsletter and investigative formats." },
+  { name: "Suggested Headlines", desc: "Publish-ready headline variants per story." },
+  { name: "Why It Spreads", desc: "The sharing psychology behind the story." },
+  { name: "Audience Impact", desc: "Primary and secondary audience segments." },
+  { name: "Editorial Risk", desc: "Risk severity, what to watch and mitigation guidance." },
+];
+
+const NEWS_COMING: string[] = [
+  "Related Story Clustering",
+  "Coverage Map",
+  "Regional Heat",
+  "Source Comparison",
+  "Google Trends timing layer",
+];
+
+function LiveBadge() {
+  return (
+    <span className="inline-flex items-center gap-1 rounded-full border border-emerald-500/25 bg-emerald-500/10 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-emerald-400">
+      <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+      Live
+    </span>
+  );
+}
+
+function ComingBadge() {
+  return (
+    <span className="inline-flex items-center gap-1 rounded-full border border-amber-400/20 bg-amber-400/8 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-amber-400">
+      Coming Next
+    </span>
+  );
+}
+
+function FlagshipBadge() {
+  return (
+    <span className="inline-flex items-center gap-1 rounded-full border border-[var(--color-accent)]/30 bg-[var(--color-accent)]/10 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-[var(--color-accent)]">
+      Planned Flagship
+    </span>
+  );
+}
+
+function FeatureCard({ name, desc }: { name: string; desc: string }) {
+  return (
+    <div className="rounded-xl border border-[var(--color-bg-elevated)] bg-[var(--color-bg-surface)] p-4 flex flex-col gap-2">
+      <div className="flex items-start justify-between gap-2">
+        <span className="text-xs font-semibold text-[var(--color-text-primary)] leading-snug">{name}</span>
+        <LiveBadge />
+      </div>
+      <p className="text-[11px] text-[var(--color-text-muted)] leading-relaxed">{desc}</p>
+    </div>
+  );
+}
+
+function FlagshipCard({ name, desc }: { name: string; desc: string }) {
+  return (
+    <div className="rounded-xl border border-[var(--color-accent)]/20 bg-[var(--color-accent)]/[0.04] p-5">
+      <div className="flex items-start justify-between gap-3 mb-2.5">
+        <span className="text-sm font-semibold text-[var(--color-text-primary)]">{name}</span>
+        <FlagshipBadge />
+      </div>
+      <p className="text-[11px] text-[var(--color-text-muted)] leading-relaxed">{desc}</p>
+    </div>
+  );
+}
+
+function ProductBlock({
+  tag,
+  title,
+  subtitle,
+  live,
+  coming,
+  flagshipName,
+  flagshipDesc,
+}: {
+  tag: string;
+  title: string;
+  subtitle: string;
+  live: { name: string; desc: string }[];
+  coming: string[];
+  flagshipName: string;
+  flagshipDesc: string;
+}) {
+  return (
+    <div className="rounded-2xl border border-[var(--color-bg-elevated)] bg-[var(--color-bg-surface)]/60 p-6 md:p-8">
+      {/* Header */}
+      <div className="mb-6">
+        <span className="inline-block rounded-md border border-[var(--color-accent)]/20 bg-[var(--color-accent)]/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-widest text-[var(--color-accent)] mb-3">
+          {tag}
+        </span>
+        <h3 className="text-lg md:text-xl font-bold mb-1.5">{title}</h3>
+        <p className="text-xs text-[var(--color-text-muted)] leading-relaxed">{subtitle}</p>
+      </div>
+
+      {/* Live features grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 mb-6">
+        {live.map((f) => (
+          <FeatureCard key={f.name} name={f.name} desc={f.desc} />
+        ))}
+      </div>
+
+      {/* Coming Next */}
+      <div className="mb-6">
+        <div className="flex items-center gap-2 mb-3">
+          <ComingBadge />
+          <span className="text-[11px] text-[var(--color-text-muted)]">Next in the build queue</span>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          {coming.map((item) => (
+            <span
+              key={item}
+              className="rounded-lg border border-[var(--color-bg-elevated)] bg-[var(--color-bg-primary)] px-3 py-1.5 text-[11px] text-[var(--color-text-muted)]"
+            >
+              {item}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      {/* Planned Flagship */}
+      <FlagshipCard name={flagshipName} desc={flagshipDesc} />
+    </div>
+  );
+}
+
+function WhatIsIncluded() {
+  return (
+    <div>
+      {/* Section header */}
+      <div className="text-center mb-10 md:mb-12">
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2">What&apos;s Included</h2>
+        <p className="text-xs sm:text-sm text-[var(--color-text-muted)] max-w-lg mx-auto">
+          Real capabilities, honest status. No vaporware.
+        </p>
+      </div>
+
+      <div className="space-y-5">
+        <ProductBlock
+          tag="YouTube Intelligence"
+          title="For creators and marketers."
+          subtitle="Know what's working before everyone else does."
+          live={YOUTUBE_LIVE}
+          coming={YOUTUBE_COMING}
+          flagshipName="AI Opportunity Generator"
+          flagshipDesc="Analyzes top-performing videos, user reports, comments, hooks and trend signals to generate realistic content ideas with title, hook, angle, thumbnail direction, difficulty and timing window."
+        />
+        <ProductBlock
+          tag="News Intelligence"
+          title="For journalists, newsletters and editorial teams."
+          subtitle="Faster angles, not just faster feeds."
+          live={NEWS_LIVE}
+          coming={NEWS_COMING}
+          flagshipName="AI News Opportunity Generator"
+          flagshipDesc="Finds undercovered story angles by analyzing live news, generated reports, narrative shifts, audience impact and editorial gaps."
+        />
+      </div>
+    </div>
   );
 }
