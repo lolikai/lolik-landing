@@ -178,18 +178,18 @@ export function LandingPage() {
             </p>
             <div className="flex items-center gap-4">
               <a
-                href="https://x.com/loliktrends"
+                href="https://x.com/AiLolik"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-[11px] text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-colors"
               >
-                𝕏 / Twitter
+                𝕏 @AiLolik
               </a>
               <a
                 href="mailto:contact@lolikai.eu"
                 className="text-[11px] text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-colors"
               >
-                Contact
+                contact@lolikai.eu
               </a>
               <a href="/privacy" className="text-[11px] text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-colors">
                 Privacy
