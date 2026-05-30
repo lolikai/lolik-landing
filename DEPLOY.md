@@ -28,7 +28,7 @@ Set these in **Cloudflare Pages → Settings → Environment Variables** (Produc
 | `NEXT_PUBLIC_SUPABASE_URL` | `https://xxxx.supabase.co` | client + server |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | `sb_publishable_xxx` | metadata only (fallback) |
 | `SUPABASE_SERVICE_ROLE_KEY` | `sb_secret_xxx` | waitlist API route (server-only) |
-| `NEXT_PUBLIC_SITE_URL` | `https://lolikai.com` | OG metadata canonical URL |
+| `NEXT_PUBLIC_SITE_URL` | `https://lolikai.eu` | OG metadata canonical URL |
 
 > `SUPABASE_SERVICE_ROLE_KEY` is never exposed to the browser — it's only read
 > inside the Edge Function at `/api/waitlist`. The `NEXT_PUBLIC_` keys are safe

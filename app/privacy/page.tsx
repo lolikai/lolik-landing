@@ -74,8 +74,8 @@ export default function PrivacyPage() {
             <p>
               You can request removal from the waitlist or deletion of your account data at any time by
               emailing{" "}
-              <a href="mailto:contact@lolikai.com" className="text-[var(--color-accent)] hover:underline">
-                contact@lolikai.com
+              <a href="mailto:contact@lolikai.eu" className="text-[var(--color-accent)] hover:underline">
+                contact@lolikai.eu
               </a>
               .
             </p>
@@ -85,8 +85,8 @@ export default function PrivacyPage() {
             <h2 className="text-base font-semibold text-[var(--color-text-primary)] mb-2">Contact</h2>
             <p>
               Questions about this policy? Reach us at{" "}
-              <a href="mailto:contact@lolikai.com" className="text-[var(--color-accent)] hover:underline">
-                contact@lolikai.com
+              <a href="mailto:contact@lolikai.eu" className="text-[var(--color-accent)] hover:underline">
+                contact@lolikai.eu
               </a>
               .
             </p>

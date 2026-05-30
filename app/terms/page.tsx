@@ -74,8 +74,8 @@ export default function TermsPage() {
             <h2 className="text-base font-semibold text-[var(--color-text-primary)] mb-2">Contact</h2>
             <p>
               Questions about these terms? Reach us at{" "}
-              <a href="mailto:contact@lolikai.com" className="text-[var(--color-accent)] hover:underline">
-                contact@lolikai.com
+              <a href="mailto:contact@lolikai.eu" className="text-[var(--color-accent)] hover:underline">
+                contact@lolikai.eu
               </a>
               .
             </p>
