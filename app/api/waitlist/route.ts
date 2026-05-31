@@ -49,8 +49,8 @@ async function sendConfirmationEmail(to: string): Promise<void> {
   const html = `<!doctype html>
 <html lang="en">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Welcome to Lolik Trends</title></head>
-<body style="margin:0;padding:0;background:#F4F4F7;">
-  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F4F4F7;padding:32px 16px;">
+<body style="margin:0;padding:0;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="padding:32px 16px;">
     <tr><td align="center">
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:480px;background:#15151F;border:1px solid #26263A;border-radius:16px;overflow:hidden;">
         <tr><td style="padding:34px 32px 0;text-align:center;">
